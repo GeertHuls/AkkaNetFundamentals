@@ -13,13 +13,22 @@ namespace MovieStreamingConsole
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
             Console.WriteLine("Actor system created");
 
-            var playbackActorProps = Props.Create<PlaybackActor>();
-            var playbackActorRef = _movieStreamingActorSystem
-                .ActorOf(playbackActorProps, "PlaybackActor");
+            var playbackActorRef = CreatePlaybackActor();
+
+            playbackActorRef.Tell("Some movie title");
+            playbackActorRef.Tell(42);
+            playbackActorRef.Tell('c');
 
             Console.ReadLine();
 
             _movieStreamingActorSystem.Terminate();
+        }
+
+        private static IActorRef CreatePlaybackActor()
+        {
+            var playbackActorProps = Props.Create<PlaybackActor>();
+            return _movieStreamingActorSystem
+                .ActorOf(playbackActorProps, "PlaybackActor");
         }
     }
 }
