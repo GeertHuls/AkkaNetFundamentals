@@ -1,6 +1,7 @@
 ﻿using System;
 using Akka.Actor;
 using MovieStreamingConsole.Actors;
+using MovieStreamingConsole.Messages;
 
 namespace MovieStreamingConsole
 {
@@ -15,8 +16,7 @@ namespace MovieStreamingConsole
 
             var playbackActorRef = CreatePlaybackActor();
 
-            playbackActorRef.Tell("Some movie title");
-            playbackActorRef.Tell(42);
+            playbackActorRef.Tell(new PlayMovieMessage("Some movie title", 42));
             playbackActorRef.Tell('c');
 
             Console.ReadLine();

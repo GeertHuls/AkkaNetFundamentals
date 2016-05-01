@@ -1,5 +1,6 @@
 ﻿using System;
 using Akka.Actor;
+using MovieStreamingConsole.Messages;
 
 namespace MovieStreamingConsole.Actors
 {
@@ -12,13 +13,11 @@ namespace MovieStreamingConsole.Actors
 
         protected override void OnReceive(object message)
         {
-            if (message is string)
+            var playMovieMessage = message as PlayMovieMessage;
+            if (playMovieMessage != null)
             {
-                Console.WriteLine("Received movie title {0}", message);
-            }
-            else if (message is int)
-            {
-                Console.WriteLine("Received user id: {0}", message);
+                Console.WriteLine("Received movie title {0}", playMovieMessage.MovieTitle);
+                Console.WriteLine("Received user id: {0}", playMovieMessage.UserId);
             }
             else
             {
