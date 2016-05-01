@@ -1,5 +1,6 @@
 ﻿using System;
 using Akka.Actor;
+using MovieStreamingConsole.Actors;
 
 namespace MovieStreamingConsole
 {
@@ -10,6 +11,11 @@ namespace MovieStreamingConsole
         static void Main(string[] args)
         {
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
+            Console.WriteLine("Actor system created");
+
+            var playbackActorProps = Props.Create<PlaybackActor>();
+            var playbackActorRef = _movieStreamingActorSystem
+                .ActorOf(playbackActorProps, "PlaybackActor");
 
             Console.ReadLine();
 
