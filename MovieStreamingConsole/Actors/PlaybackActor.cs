@@ -1,28 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Akka.Actor;
 using MovieStreamingConsole.Messages;
 
 namespace MovieStreamingConsole.Actors
 {
-    public class PlaybackActor : UntypedActor
+    public class PlaybackActor : ReceiveActor
     {
         public PlaybackActor()
         {
             Console.WriteLine("Creating a PlaybackActor");
+
+            Receive<PlayMovieMessage>(message => HandlePlayMovieMessage(message));
         }
 
-        protected override void OnReceive(object message)
+        private void HandlePlayMovieMessage(PlayMovieMessage message)
         {
-            var playMovieMessage = message as PlayMovieMessage;
-            if (playMovieMessage != null)
-            {
-                Console.WriteLine("Received movie title {0}", playMovieMessage.MovieTitle);
-                Console.WriteLine("Received user id: {0}", playMovieMessage.UserId);
-            }
-            else
-            {
-                Unhandled(message);
-            }
+            Console.WriteLine("Received movie title {0}", message.MovieTitle);
+            Console.WriteLine("Received user id: {0}", message.UserId);
         }
     }
 }
