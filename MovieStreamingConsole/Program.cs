@@ -17,11 +17,16 @@ namespace MovieStreamingConsole
             var playbackActorRef = CreatePlaybackActor();
 
             playbackActorRef.Tell(new PlayMovieMessage("Some movie title", 42));
-            playbackActorRef.Tell('c');
+            playbackActorRef.Tell(new PlayMovieMessage("Some movie title the revenge", 99));
+            playbackActorRef.Tell(new PlayMovieMessage("Some movie title the next generation", 77));
+            playbackActorRef.Tell(new PlayMovieMessage("Some movie title the pre sequel", 1));
 
             Console.ReadLine();
 
             _movieStreamingActorSystem.Terminate();
+            Console.WriteLine("Actor system shutdown");
+
+            Console.ReadLine();
         }
 
         private static IActorRef CreatePlaybackActor()
