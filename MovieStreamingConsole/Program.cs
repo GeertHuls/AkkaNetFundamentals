@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Akka.Actor;
 using MovieStreamingConsole.Actors;
 using MovieStreamingConsole.Messages;
@@ -10,6 +11,13 @@ namespace MovieStreamingConsole
         private static ActorSystem _movieStreamingActorSystem;
 
         static void Main(string[] args)
+        {
+            Start().Wait();
+
+            Console.ReadLine();
+        }
+
+        private static async Task Start()
         {
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
             Console.WriteLine("Actor system created");
@@ -23,10 +31,11 @@ namespace MovieStreamingConsole
 
             Console.ReadLine();
 
-            _movieStreamingActorSystem.Terminate();
-            Console.WriteLine("Actor system shutdown");
-
-            Console.ReadLine();
+            // Tell actor system (and all child actors) to shutdown
+            await _movieStreamingActorSystem.Terminate();
+            // Wait for actor system to finish shutting down
+            await _movieStreamingActorSystem.WhenTerminated;
+            Console.WriteLine("Actor system Terminated");
         }
 
         private static IActorRef CreatePlaybackActor()
