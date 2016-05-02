@@ -29,6 +29,8 @@ namespace MovieStreamingConsole
             playbackActorRef.Tell(new PlayMovieMessage("Some movie title the next generation", 77));
             playbackActorRef.Tell(new PlayMovieMessage("Some movie title the pre sequel", 1));
 
+            StopActor(playbackActorRef);
+
             Console.ReadLine();
 
             // Tell actor system (and all child actors) to shutdown
@@ -43,6 +45,12 @@ namespace MovieStreamingConsole
             var playbackActorProps = Props.Create<PlaybackActor>();
             return _movieStreamingActorSystem
                 .ActorOf(playbackActorProps, "PlaybackActor");
+        }
+
+        private static void StopActor(IActorRef playbackActorRef)
+        {
+            // By consequence the poison pill triggers the PostStop call back
+            playbackActorRef.Tell(PoisonPill.Instance);
         }
     }
 }
