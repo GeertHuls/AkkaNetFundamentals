@@ -19,9 +19,45 @@ namespace MovieStreamingConsole
 
         private static async Task Start()
         {
+            CreateActorSystem();
+
+            UserActorDemo();
+
+            await TerminateActorSystem();
+        }
+
+        private static void CreateActorSystem()
+        {
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
             Console.WriteLine("Actor system created");
+        }
 
+        private static void UserActorDemo()
+        {
+            var userActorProps = Props.Create<UserActor>();
+            var userActorRef = _movieStreamingActorSystem.ActorOf(userActorProps, "UserActor");
+
+            Console.ReadLine();
+            Console.WriteLine("Sending a PlayMovieMessage (movie 1)");
+            userActorRef.Tell(new PlayMovieMessage("Movie1", 42));
+
+            Console.ReadLine();
+            Console.WriteLine("Sending another PlayMovieMessage (movie 2 - the revenge)");
+            userActorRef.Tell(new PlayMovieMessage("Movie 2 - the revenge", 42));
+
+            Console.ReadLine();
+            Console.WriteLine("Sending a StopMovieMessage");
+            userActorRef.Tell(new StopMovieMessage());
+
+            Console.ReadLine();
+            Console.WriteLine("Sending another StopMovieMessage");
+            userActorRef.Tell(new StopMovieMessage());
+
+            Console.ReadLine();
+        }
+
+        private static void DemoPlaybackActor()
+        {
             var playbackActorRef = CreatePlaybackActor();
 
             playbackActorRef.Tell(new PlayMovieMessage("Some movie title", 42));
@@ -30,14 +66,6 @@ namespace MovieStreamingConsole
             playbackActorRef.Tell(new PlayMovieMessage("Some movie title the pre sequel", 1));
 
             StopActor(playbackActorRef);
-
-            Console.ReadLine();
-
-            // Tell actor system (and all child actors) to shutdown
-            await _movieStreamingActorSystem.Terminate();
-            // Wait for actor system to finish shutting down
-            await _movieStreamingActorSystem.WhenTerminated;
-            Console.WriteLine("Actor system Terminated");
         }
 
         private static IActorRef CreatePlaybackActor()
@@ -51,6 +79,15 @@ namespace MovieStreamingConsole
         {
             // By consequence the poison pill triggers the PostStop call back
             playbackActorRef.Tell(PoisonPill.Instance);
+        }
+
+        private static async Task TerminateActorSystem()
+        {
+            // Tell actor system (and all child actors) to shutdown
+            await _movieStreamingActorSystem.Terminate();
+            // Wait for actor system to finish shutting down
+            await _movieStreamingActorSystem.WhenTerminated;
+            Console.WriteLine("Actor system Terminated");
         }
     }
 }
