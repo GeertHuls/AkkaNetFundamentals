@@ -20,7 +20,7 @@ namespace MovieStreamingConsole.Actors
                 message.MovieTitle, message.UserId);
         }
 
-        protected override void PostRestart(Exception reason)
+        protected override void PreStart()
         {
             Console.WriteLine("PlaybackActor PreStart");
         }
@@ -39,11 +39,11 @@ namespace MovieStreamingConsole.Actors
             base.PreRestart(reason, message);
         }
 
-        public override void AroundPostRestart(Exception cause, object message)
+        protected override void PostRestart(Exception reason)
         {
-            Console.WriteLine("PlaybackActor PostRestart because {0}", cause);
+            Console.WriteLine("PlaybackActor PostRestart because {0}", reason);
 
-            base.AroundPostRestart(cause, message);
+            base.PostRestart(reason);
         }
     }
 }
