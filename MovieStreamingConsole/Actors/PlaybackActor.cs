@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Akka.Actor;
-using MovieStreamingConsole.Messages;
 
 namespace MovieStreamingConsole.Actors
 {
@@ -9,30 +7,23 @@ namespace MovieStreamingConsole.Actors
     {
         public PlaybackActor()
         {
-            Console.WriteLine("Creating a PlaybackActor");
-
-            Receive<PlayMovieMessage>(message => HandlePlayMovieMessage(message));
-        }
-
-        private void HandlePlayMovieMessage(PlayMovieMessage message)
-        {
-            Console.WriteLine("PlayMovieMessage '{0}' for user {1}",
-                message.MovieTitle, message.UserId);
+            Context.ActorOf(Props.Create<UserCoordinatorActor>(), "UserCoordinator");
+            Context.ActorOf(Props.Create<PlaybackStatisticsActor>(), "PlaybackStatistics");
         }
 
         protected override void PreStart()
         {
-            Console.WriteLine("PlaybackActor PreStart");
+            ColorConsole.WriteLineGreen("PlaybackActor PreStart");
         }
 
         protected override void PostStop()
         {
-            Console.WriteLine("PlaybackActor PostStop");
+            ColorConsole.WriteLineGreen("PlaybackActor PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            Console.WriteLine("PlaybackActor PreRestart because: {0}", reason);
+            ColorConsole.WriteLineGreen("PlaybackActor PreRestart because: {0}", reason);
 
             // Disable the base class call here below in case you want to 
             // prevent a PostStop on all child actors.
@@ -41,7 +32,7 @@ namespace MovieStreamingConsole.Actors
 
         protected override void PostRestart(Exception reason)
         {
-            Console.WriteLine("PlaybackActor PostRestart because {0}", reason);
+            ColorConsole.WriteLineGreen("PlaybackActor PostRestart because {0}", reason);
 
             base.PostRestart(reason);
         }

@@ -21,7 +21,7 @@ namespace MovieStreamingConsole
         private static async Task Start()
         {
             CreateActorSystem();
-
+            
             do
             {
                 ShortPause();
@@ -32,21 +32,26 @@ namespace MovieStreamingConsole
 
                 var command = Console.ReadLine();
 
+                //Example play command:
+                // > play,42,some movie title
+                var commandAndArgumentList = command.Split(',');
                 if (command.StartsWith("play"))
                 {
-                    int userId = int.Parse(command.Split(',')[1]);
-                    string movieTitle = command.Split(',')[2];
+                    var userId = int.Parse(commandAndArgumentList[1]);
+                    var movieTitle = commandAndArgumentList[2];
 
                     var message = new PlayMovieMessage(movieTitle, userId);
-                    _movieStreamingActorSystem.ActorSelection("/user/Playback/UserCoordinator").Tell(message);
+                    _movieStreamingActorSystem.ActorSelection("/user/Playback/UserCoordinator")
+                        .Tell(message);
                 }
 
                 if (command.StartsWith("stop"))
                 {
-                    int userId = int.Parse(command.Split(',')[1]);
+                    var userId = int.Parse(commandAndArgumentList[1]);
 
                     var message = new StopMovieMessage(userId);
-                    _movieStreamingActorSystem.ActorSelection("/user/Playback/UserCoordinator").Tell(message);
+                    _movieStreamingActorSystem.ActorSelection("/user/Playback/UserCoordinator")
+                        .Tell(message);
                 }
 
                 if (command == "exit")
@@ -60,11 +65,10 @@ namespace MovieStreamingConsole
 
         private static void CreateActorSystem()
         {
-            Console.WriteLine("Creating MovieStreamingActorSystem");
+            ColorConsole.WriteLineGray("Creating MovieStreamingActorSystem");
             _movieStreamingActorSystem = ActorSystem.Create("MovieStreamingActorSystem");
 
-
-            Console.WriteLine("Creating actor supervisory hierachy");
+            ColorConsole.WriteLineGray("Creating actor supervisory hierachy");
             _movieStreamingActorSystem.ActorOf(Props.Create<PlaybackActor>(), "Playback");
         }
 
@@ -74,7 +78,7 @@ namespace MovieStreamingConsole
             await _movieStreamingActorSystem.Terminate();
             // Wait for actor system to finish shutting down
             await _movieStreamingActorSystem.WhenTerminated;
-            Console.WriteLine("Actor system Terminated");
+            ColorConsole.WriteLineGray("Actor system Terminated");
         }
 
         // Perform a short pause for demo purposes to allow console to update nicely
