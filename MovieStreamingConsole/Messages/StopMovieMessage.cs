@@ -2,11 +2,11 @@
 {
     public class StopMovieMessage
     {
-        private int userId;
+        public int UserId { get; }
 
         public StopMovieMessage(int userId)
         {
-            this.userId = userId;
+            UserId = userId;
         }
     }
 }

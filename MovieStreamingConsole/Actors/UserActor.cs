@@ -7,45 +7,46 @@ namespace MovieStreamingConsole.Actors
     public class UserActor : ReceiveActor
     {
         private string _currentlyWatching;
+        private int _userId;
 
-        public UserActor()
+        public UserActor(int userId)
         {
-            Console.WriteLine("Creating a UserActor");
+            ColorConsole.WriteLineYellow("Creating a UserActor");
+            _userId = userId;
 
-            Console.WriteLine("Setting initial behaviour to stopped");
             Stopped();
         }
 
         private void Playing()
         {
             Receive<PlayMovieMessage>(
-                m => Console.WriteLine("Error: cannot start playing another movie before stopping the existing one"));
+                m => ColorConsole.WriteLineRed("Error: cannot start playing another movie before stopping the existing one"));
             Receive<StopMovieMessage>(m => StopPlayingCurrentMovie());
 
-            Console.WriteLine("UserActor has now become Playing");
+            ColorConsole.WriteLineYellow($"UserActor{_userId} has now become Playing");
         }
 
         private void Stopped()
         {
             Receive<PlayMovieMessage>(m => StartPlayingMovie(m.MovieTitle));
             Receive<StopMovieMessage>(
-                m => Console.WriteLine("Error: the movie cannot be stopped, nothing is playing"));
+                m => ColorConsole.WriteLineRed("Error: the movie cannot be stopped, nothing is playing"));
 
-            Console.WriteLine("UserActor has now become Stopped");
+            ColorConsole.WriteLineYellow($"UserActor {_userId} has now become Stopped");
         }
 
         private void StartPlayingMovie(string title)
         {
             _currentlyWatching = title;
 
-            Console.WriteLine("User is currently watching '{0}'", title);
+            ColorConsole.WriteLineYellow($"User {_userId} is currently watching '{title}'");
 
             Become(Playing);
         }
 
         private void StopPlayingCurrentMovie()
         {
-            Console.WriteLine("User has stopped watching  '{0}'", _currentlyWatching);
+            ColorConsole.WriteLineYellow($"User {_userId} has stopped watching  '{_currentlyWatching}'");
 
             _currentlyWatching = null;
 
@@ -54,24 +55,24 @@ namespace MovieStreamingConsole.Actors
 
         protected override void PreStart()
         {
-            Console.WriteLine("UserActor PreStart");
+            ColorConsole.WriteLineYellow("UserActor PreStart");
         }
 
         protected override void PostStop()
         {
-            Console.WriteLine("UserActor PostStop");
+            ColorConsole.WriteLineYellow("UserActor PostStop");
         }
 
         protected override void PreRestart(Exception reason, object message)
         {
-            Console.WriteLine("UserActor PreRestart because: " + reason);
+            ColorConsole.WriteLineYellow("UserActor PreRestart because: " + reason);
 
             base.PreRestart(reason, message);
         }
 
         protected override void PostRestart(Exception reason)
         {
-            Console.WriteLine("UserActor PostRestart because: " + reason);
+            ColorConsole.WriteLineYellow("UserActor PostRestart because: " + reason);
 
             base.PostRestart(reason);
         }

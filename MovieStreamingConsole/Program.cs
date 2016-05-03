@@ -45,6 +45,8 @@ namespace MovieStreamingConsole
                         .Tell(message);
                 }
 
+                //Example stop command:
+                // > stop,42
                 if (command.StartsWith("stop"))
                 {
                     var userId = int.Parse(commandAndArgumentList[1]);
