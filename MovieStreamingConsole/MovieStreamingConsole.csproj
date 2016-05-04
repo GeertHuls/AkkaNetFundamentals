@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\MoviePlayCounterActor.cs" />
     <Compile Include="Actors\PlaybackActor.cs" />
     <Compile Include="Actors\PlaybackStatisticsActor.cs" />
     <Compile Include="Actors\UserActor.cs" />

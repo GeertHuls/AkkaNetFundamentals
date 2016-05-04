@@ -7,6 +7,7 @@ namespace MovieStreamingConsole.Actors
     {
         public PlaybackStatisticsActor()
         {
+            Context.ActorOf(Props.Create<MoviePlayCounterActor>(), "MoviePlayCounter");
         }
 
         protected override void PreStart()
