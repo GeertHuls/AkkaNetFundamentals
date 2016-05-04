@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{611D8D18-17E9-49D4-8A53-3A49B8E24D09}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D941F3B1-19E6-4D01-9099-670EACC87CF1}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MovieStream.Remote</RootNamespace>
-    <AssemblyName>MovieStream.Remote</AssemblyName>
+    <RootNamespace>MovieStreaming.Common</RootNamespace>
+    <AssemblyName>MovieStreaming.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -55,22 +52,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Actors\MoviePlayCounterActor.cs" />
+    <Compile Include="Actors\PlaybackActor.cs" />
+    <Compile Include="Actors\PlaybackStatisticsActor.cs" />
+    <Compile Include="Actors\UserActor.cs" />
+    <Compile Include="Actors\UserCoordinatorActor.cs" />
+    <Compile Include="ColorConsole.cs" />
+    <Compile Include="Exceptions\SimulatedCorruptStateException.cs" />
+    <Compile Include="Exceptions\SimulatedTerribleMovieException.cs" />
+    <Compile Include="Messages\IncrementPlayCountMessage.cs" />
+    <Compile Include="Messages\PlayMovieMessage.cs" />
+    <Compile Include="Messages\StopMovieMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MovieStreaming.Common\MovieStreaming.Common.csproj">
-      <Project>{D941F3B1-19E6-4D01-9099-670EACC87CF1}</Project>
-      <Name>MovieStreaming.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MovieStreamingConsole\MovieStreamingConsole.csproj">
-      <Project>{A72B0003-2A87-4ACD-B436-70BCD7DA71CA}</Project>
-      <Name>MovieStreamingConsole</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -2,8 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Akka.Actor;
-using MovieStreamingConsole.Actors;
-using MovieStreamingConsole.Messages;
+using MovieStreaming.Common;
+using MovieStreaming.Common.Actors;
+using MovieStreaming.Common.Messages;
 
 namespace MovieStreamingConsole
 {

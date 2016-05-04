@@ -55,23 +55,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\MoviePlayCounterActor.cs" />
-    <Compile Include="Actors\PlaybackActor.cs" />
-    <Compile Include="Actors\PlaybackStatisticsActor.cs" />
-    <Compile Include="Actors\UserActor.cs" />
-    <Compile Include="Actors\UserCoordinatorActor.cs" />
-    <Compile Include="ColorConsole.cs" />
-    <Compile Include="Exceptions\SimulatedCorruptStateException.cs" />
-    <Compile Include="Exceptions\SimulatedTerribleMovieException.cs" />
-    <Compile Include="Messages\IncrementPlayCountMessage.cs" />
-    <Compile Include="Messages\PlayMovieMessage.cs" />
-    <Compile Include="Messages\StopMovieMessage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Messages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MovieStreaming.Common\MovieStreaming.Common.csproj">
+      <Project>{D941F3B1-19E6-4D01-9099-670EACC87CF1}</Project>
+      <Name>MovieStreaming.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

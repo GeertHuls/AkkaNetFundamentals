@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStreamingConsole", "Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStream.Remote", "MovieStream.Remote\MovieStream.Remote.csproj", "{611D8D18-17E9-49D4-8A53-3A49B8E24D09}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStreaming.Common", "MovieStreaming.Common\MovieStreaming.Common.csproj", "{D941F3B1-19E6-4D01-9099-670EACC87CF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{611D8D18-17E9-49D4-8A53-3A49B8E24D09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{611D8D18-17E9-49D4-8A53-3A49B8E24D09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{611D8D18-17E9-49D4-8A53-3A49B8E24D09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D941F3B1-19E6-4D01-9099-670EACC87CF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D941F3B1-19E6-4D01-9099-670EACC87CF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D941F3B1-19E6-4D01-9099-670EACC87CF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D941F3B1-19E6-4D01-9099-670EACC87CF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

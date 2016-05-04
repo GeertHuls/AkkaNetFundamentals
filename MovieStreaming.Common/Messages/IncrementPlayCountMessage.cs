@@ -1,4 +1,4 @@
-﻿namespace MovieStreamingConsole.Messages
+﻿namespace MovieStreaming.Common.Messages
 {
     public class IncrementPlayCountMessage
     {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Akka.Actor;
+using MovieStreaming.Common;
 using MovieStreamingConsole;
 
 namespace MovieStream.Remote

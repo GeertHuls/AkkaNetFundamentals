@@ -1,7 +1,7 @@
-﻿using System;
+using System;
 using Akka.Actor;
 
-namespace MovieStreamingConsole.Actors
+namespace MovieStreaming.Common.Actors
 {
     public class PlaybackActor : ReceiveActor
     {
