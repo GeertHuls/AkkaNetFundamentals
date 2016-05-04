@@ -67,10 +67,6 @@
       <Project>{D941F3B1-19E6-4D01-9099-670EACC87CF1}</Project>
       <Name>MovieStreaming.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MovieStreamingConsole\MovieStreamingConsole.csproj">
-      <Project>{A72B0003-2A87-4ACD-B436-70BCD7DA71CA}</Project>
-      <Name>MovieStreamingConsole</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
