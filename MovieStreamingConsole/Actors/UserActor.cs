@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Contexts;
 using Akka.Actor;
 using MovieStreamingConsole.Messages;
 
@@ -8,7 +7,7 @@ namespace MovieStreamingConsole.Actors
     public class UserActor : ReceiveActor
     {
         private string _currentlyWatching;
-        private int _userId;
+        private readonly int _userId;
 
         public UserActor(int userId)
         {
