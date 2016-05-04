@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Remoting.Contexts;
 using Akka.Actor;
 using MovieStreamingConsole.Messages;
 
@@ -40,6 +41,9 @@ namespace MovieStreamingConsole.Actors
             _currentlyWatching = title;
 
             ColorConsole.WriteLineYellow($"User {_userId} is currently watching '{title}'");
+
+            Context.ActorSelection("/user/Playback/PlaybackStatistics/MoviePlayCounter")
+                .Tell(new IncrementPlayCountMessage(title));
 
             Become(Playing);
         }
