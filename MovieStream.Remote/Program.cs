@@ -21,6 +21,11 @@ namespace MovieStream.Remote
         private static async Task Start()
         {
             CreateActorSystem();
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ColorConsole.WriteLineYellow("Press any key to shutdown remote actor system.");
+            Console.ReadLine();
+
             await TerminateActorSystem();
         }
 
