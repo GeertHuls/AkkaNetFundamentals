@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStreamingConsole", "MovieStreamingConsole\MovieStreamingConsole.csproj", "{A72B0003-2A87-4ACD-B436-70BCD7DA71CA}"
+	ProjectSection(ProjectDependencies) = postProject
+		{611D8D18-17E9-49D4-8A53-3A49B8E24D09} = {611D8D18-17E9-49D4-8A53-3A49B8E24D09}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieStream.Remote", "MovieStream.Remote\MovieStream.Remote.csproj", "{611D8D18-17E9-49D4-8A53-3A49B8E24D09}"
 EndProject
